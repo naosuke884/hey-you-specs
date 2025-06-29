@@ -1,0 +1,37 @@
+---
+title: Hey You System ER Diagram
+---
+erDiagram
+    USER ||--o| ROOM : "currently in"
+    USER ||--o{ MESSAGE : sends
+    ROOM ||--o{ MESSAGE : contains
+    
+    ROOM {
+        string id PK "Room unique identifier"
+        string name "Room name"
+        string description "Room description"
+        datetime created_at "Room creation timestamp"
+        datetime updated_at "Room update timestamp"
+        boolean is_active "Room active status"
+    }
+    
+    USER {
+        string id PK "User unique identifier"
+        string username "User display name"
+        string current_room_id FK "Currently joined room ID (null if not in any room)"
+        datetime joined_at "Current room join timestamp"
+        datetime created_at "User registration timestamp"
+        datetime updated_at "User update timestamp"
+        datetime last_seen_at "Last activity timestamp"
+    }
+    
+    MESSAGE {
+        string id PK "Message unique identifier"
+        string user_id FK "Message sender user ID"
+        string room_id FK "Room where message was sent"
+        string content "Message content/text"
+        string message_type "Message type (text, image, file, system, etc)"
+        datetime created_at "Message sent timestamp"
+        datetime updated_at "Message update timestamp (for edits)"
+        boolean is_deleted "Soft delete flag"
+    }
