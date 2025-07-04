@@ -1,0 +1,33 @@
+graph TB
+    %% クライアント1
+    subgraph "クライアント1"
+        Browser1[ブラウザ1]
+    end
+
+    %% クライアント2
+    subgraph "クライアント2"
+        Browser2[ブラウザ2]
+    end
+
+    %% フロントエンド
+    NextJS[Next.js サーバー]
+
+    %% サーバー
+    subgraph "Go WebSocketサーバー"
+        WSHandler[WebSocket Handler]
+    end
+
+    %% 接続
+    Browser1 --> NextJS
+    Browser2 --> NextJS
+    Browser1 -.-> WSHandler
+    Browser2 -.-> WSHandler
+
+    %% スタイル
+    classDef client fill:#1a237e,stroke:#3f51b5,stroke-width:2px,color:#fff
+    classDef frontend fill:#0d4377,stroke:#1976d2,stroke-width:2px,color:#fff
+    classDef server fill:#4a148c,stroke:#9c27b0,stroke-width:2px,color:#fff
+
+    class Browser1,Browser2 client
+    class NextJS frontend
+    class WSHandler server
