@@ -18,23 +18,23 @@
           "type": "array",
           "items": {
             "type": "string"
-          },
-          "default": []
+          }
         },
         "createdAt": {
           "type": "string",
           "format": "date-time"
         },
         "isActive": {
-          "type": "boolean",
-          "default": true
+          "type": "boolean"
         }
       },
       "required": [
         "id",
         "name",
         "description",
-        "createdAt"
+        "participants",
+        "createdAt",
+        "isActive"
       ],
       "additionalProperties": false
     }
