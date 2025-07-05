@@ -5,7 +5,8 @@
       "type": "object",
       "properties": {
         "id": {
-          "type": "number"
+          "type": "integer",
+          "exclusiveMinimum": 0
         },
         "name": {
           "type": "string"
@@ -22,8 +23,7 @@
         },
         "createdAt": {
           "type": "string",
-          "format": "date-time",
-          "default": "2025-07-04T07:01:06.702Z"
+          "format": "date-time"
         },
         "isActive": {
           "type": "boolean",
@@ -32,7 +32,9 @@
       },
       "required": [
         "id",
-        "name"
+        "name",
+        "description",
+        "createdAt"
       ],
       "additionalProperties": false
     }
