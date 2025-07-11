@@ -1,0 +1,29 @@
+definitions:
+  handler.HelloWorldResponse:
+    properties:
+      message:
+        type: string
+    type: object
+info:
+  contact: {}
+  description: API server for Hey You real-time chat application
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  title: Hey You API
+  version: preview
+paths:
+  /:
+    get:
+      description: Returns a simple hello world message
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: hello world
+          schema:
+            $ref: '#/definitions/handler.HelloWorldResponse'
+      summary: Root endpoint
+      tags:
+      - general
+swagger: "2.0"
