@@ -2,20 +2,19 @@
 title: Hey You System ER Diagram
 ---
 erDiagram
-    USER ||--o| ROOM : "currently in"
-    USER ||--o{ MESSAGE : sends
-    ROOM ||--o{ MESSAGE : contains
+    USERS ||--o| ROOMS : "currently in"
+    USERS ||--o{ MESSAGES : sends
+    ROOMS ||--o{ MESSAGES : contains
     
-    ROOM {
+    ROOMS {
         string id PK "Room unique identifier"
         string name "Room name"
         string description "Room description"
         datetime created_at "Room creation timestamp"
         datetime updated_at "Room update timestamp"
-        boolean is_active "Room active status"
     }
     
-    USER {
+    USERS {
         string id PK "User unique identifier"
         string username "User display name"
         string current_room_id FK "Currently joined room ID (null if not in any room)"
@@ -25,7 +24,7 @@ erDiagram
         datetime last_seen_at "Last activity timestamp"
     }
     
-    MESSAGE {
+    MESSAGES {
         string id PK "Message unique identifier"
         string user_id FK "Message sender user ID"
         string room_id FK "Room where message was sent"
