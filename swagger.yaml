@@ -1,8 +1,58 @@
 definitions:
-  handler.HelloWorldResponse:
+  handlers.CreateRoomRequest:
+    description: Request for creating a new room
+    properties:
+      description:
+        maxLength: 500
+        type: string
+      name:
+        maxLength: 40
+        minLength: 1
+        type: string
+    required:
+    - name
+    type: object
+  handlers.CreateRoomResponse:
+    description: Response for creating a new room
+    properties:
+      id:
+        type: string
+    required:
+    - id
+    type: object
+  handlers.GetRoomsResponse:
+    description: Response for getting all rooms
+    properties:
+      rooms:
+        items:
+          $ref: '#/definitions/room.Room'
+        type: array
+    type: object
+  handlers.HelloWorldResponse:
     properties:
       message:
         type: string
+    type: object
+  room.Room:
+    properties:
+      created_at:
+        type: string
+      description:
+        maxLength: 500
+        type: string
+      id:
+        type: string
+      name:
+        maxLength: 40
+        minLength: 1
+        type: string
+      updated_at:
+        type: string
+    required:
+    - created_at
+    - id
+    - name
+    - updated_at
     type: object
 info:
   contact: {}
@@ -22,8 +72,56 @@ paths:
         "200":
           description: hello world
           schema:
-            $ref: '#/definitions/handler.HelloWorldResponse'
+            $ref: '#/definitions/handlers.HelloWorldResponse'
       summary: Root endpoint
       tags:
       - general
+  /rooms:
+    get:
+      consumes:
+      - application/json
+      description: Retrieve a list of all available rooms
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Successfully retrieved rooms
+          schema:
+            $ref: '#/definitions/handlers.GetRoomsResponse'
+        "500":
+          description: Internal server error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get all rooms
+      tags:
+      - rooms
+    post:
+      consumes:
+      - application/json
+      description: Create a new room with the provided details
+      parameters:
+      - description: Room creation request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.CreateRoomRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Successfully created room
+          schema:
+            $ref: '#/definitions/handlers.CreateRoomResponse'
+        "500":
+          description: Internal server error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Create a new room
+      tags:
+      - rooms
 swagger: "2.0"
