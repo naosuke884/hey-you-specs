@@ -115,6 +115,12 @@ paths:
           description: Successfully created room
           schema:
             $ref: '#/definitions/handlers.CreateRoomResponse'
+        "400":
+          description: Invalid request body
+          schema:
+            additionalProperties:
+              type: string
+            type: object
         "500":
           description: Internal server error
           schema:
